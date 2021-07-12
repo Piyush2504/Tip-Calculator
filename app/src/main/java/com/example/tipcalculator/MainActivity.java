@@ -48,17 +48,21 @@ public class MainActivity extends AppCompatActivity {
     public void TipCalc(View v){
         Toast.makeText(this, "Calculating!!", Toast.LENGTH_SHORT).show();
         Intent intent1 = new Intent(this,CalculatedTip.class);
+        if(TotalBill.length()==0){
+            TotalBill.setError("Please Enter the Bill Amount First");
+            TotalBill.requestFocus();
+        }
+        else {
+            double BillAmount = Double.parseDouble(TotalBill.getText().toString());
 
-        double BillAmount = Double.parseDouble(TotalBill.getText().toString());
-
-        float percent = slider.getValue();
-        double tipAmount = BillAmount*Double.parseDouble(String.valueOf(percent))/100;
-        double totalbill_tip= BillAmount+tipAmount;
-        intent1.putExtra(Calculated,BillAmount);
-        intent1.putExtra(Calculating,tipAmount);
-        intent1.putExtra(Calculator,totalbill_tip);
-        startActivity(intent1);
-
+            float percent = slider.getValue();
+            double tipAmount = BillAmount * Double.parseDouble(String.valueOf(percent)) / 100;
+            double totalbill_tip = BillAmount + tipAmount;
+            intent1.putExtra(Calculated, BillAmount);
+            intent1.putExtra(Calculating, tipAmount);
+            intent1.putExtra(Calculator, totalbill_tip);
+            startActivity(intent1);
+        }
     }
 
 }
